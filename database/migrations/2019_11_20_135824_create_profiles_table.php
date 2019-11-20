@@ -17,6 +17,8 @@ class CreateProfilesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->bigInteger('group_id');
+            $table->bigInteger('santa_id')->nullable();
+            $table->boolean('confirmed');
             $table->string('full_name');
             $table->string('address');
             $table->string('address_opt')->nullable();
