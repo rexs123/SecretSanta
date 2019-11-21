@@ -17,7 +17,7 @@ class Profile extends Model
         return $this->hasMany('App\User', 'santa_id');
     }
 
-    public function wishlist()
+    public function wishlists()
     {
         return $this->hasMany('App\Wishlist');
     }

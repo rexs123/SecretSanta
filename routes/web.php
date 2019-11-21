@@ -26,3 +26,5 @@ Route::post('group/join', 'GroupController@store')->name('group.store');
 Route::post('profile/create', 'ProfileController@store')->name('profile.store');
 Route::post('profile/confirm/{profile}', 'ProfileController@update')->name('profile.update');
 Route::delete('profile/unconfirm/{profile}', 'ProfileController@destroy')->name('profile.destroy');
+
+Route::post('wishlist/store', 'WishlistController@store')->name('wishlist.store');

@@ -18,7 +18,7 @@ class CreateWishlistsTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('profile_id');
             $table->string('url');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -4,28 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,41 +17,21 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'url' => 'active_url|required|bail',
+            'notes' => 'nullable'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Wishlist $wishlist)
-    {
-        //
-    }
+        Wishlist::create([
+            'profile_id' => $request->profile_id,
+            'user_id' => Auth::id(),
+            'url' => $request->url,
+            'notes' => $request->notes
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Wishlist $wishlist)
-    {
-        //
-    }
+        return redirect()->back()->with('status', 'Successfully added an item to your wish list.');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Wishlist $wishlist)
-    {
-        //
+
     }
 
     /**

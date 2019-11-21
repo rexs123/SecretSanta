@@ -59,16 +59,23 @@
                         <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-{{ $group->slug }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
                             <div class="row">
                                 <div class="col-6">
+                                    <h4 class="font-weight-bold text-uppercase">Address</h4>
+                                    <hr>
                                     @include('components._profileForm')
                                     @include('components._profileAddress')
                                     @include('components._profileConfirmation')
                                 </div>
                                 <div class="col-6">
-                                    <form action="" method="POST">
-                                        @csrf
-                                        @method('post')
-
-                                    </form>
+                                    <h4 class="font-weight-bold text-uppercase">Wishlist</h4>
+                                    <hr>
+                                    @include('components._profileWishlist')
+                                    @if($group->profile)
+                                        @foreach($group->profile->wishlists as $wishlist)
+                                            <p class="mb-1"><small>URL: </small><a href="{{ $wishlist->url }}">{{ $wishlist->url }}</a></p>
+                                            <p><small>NOTES: </small>{{ $wishlist->notes }}</p>
+                                            
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
