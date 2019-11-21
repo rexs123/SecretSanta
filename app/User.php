@@ -34,6 +34,22 @@ class User extends Authenticatable
     protected $casts = [
         //
     ];
+
+    public function profile()
+    {
+        return $this->hasMany('App\Profile');
+    }
+
+    public function reciever()
+    {
+        return $this->belongsTo('App\Profile', 'id', 'santa_id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group', 'user_groups', 'user_id', 'group_id');
+    }
+
     public function findByUsernameOrCreate($userData)
     {
         return User::updateOrCreate(

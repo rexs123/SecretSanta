@@ -14,7 +14,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        return view('group.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('group.join');
     }
 
     /**
@@ -35,7 +35,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
