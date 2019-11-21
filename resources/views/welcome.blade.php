@@ -48,14 +48,16 @@
                 font-size: 84px;
             }
 
-            .links > a {
+            .links {
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
                 letter-spacing: .1rem;
-                text-decoration: none;
                 text-transform: uppercase;
+            }
+            .links a {
+                text-decoration: none;
             }
 
             .m-b-md {
@@ -68,31 +70,23 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('dashboard') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    Welcome to Secret Santa 2019
+                    <small style="display:block; font-size: 13px;" class="links">
+                        @auth
+                            Visit your <a href="{{ route('dashboard') }}">dashboard</a>.
+                        @else
+                            <a href="{{ route('login') }}">Login</a> with Discord to begin.
+                        @endauth
+                    </small>
                 </div>
             </div>
         </div>

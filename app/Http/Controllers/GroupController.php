@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -35,7 +36,16 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'code' => 'bail|required|uuid'
+        ]);
+        $user = Auth::user();
+        $code = Group::where('code', $request->code)->first();
+        $code->uses = $code->uses -1;
+        $code->save();
+
+        $code->users()->sync($user->id);
+        return redirect()->back()->with('status', 'Successfully joined a group.');
     }
 
     /**

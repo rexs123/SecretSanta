@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->bigInteger('group_id');
             $table->bigInteger('santa_id')->nullable();
             $table->boolean('confirmed');
+            $table->boolean('shipped')->default(0);
             $table->string('full_name');
             $table->string('address');
             $table->string('address_opt')->nullable();
