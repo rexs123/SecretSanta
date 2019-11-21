@@ -6,11 +6,11 @@
         </div>
     </div>
     <div class="row mt-1">
-        <div class="col-6">
+        <div class="col-8">
             <label class="d-block font-weight-bold mb-0">Address 1</label>
             <span>{{ $profile->address }}</span>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <label class="d-block font-weight-bold mb-0">Address 2</label>
             <span>{{ $profile->address_opt }}</span>
         </div>
@@ -28,7 +28,7 @@
     <div class="row mt-1">
         <div class="col-6">
             <label class="d-block font-weight-bold mb-0">Country</label>
-            <span>{{ $profile->address }}</span>
+            <span>{{ $profile->country }}</span>
         </div>
         <div class="col-6">
             <label class="d-block font-weight-bold mb-0">Zip / Postal</label>
