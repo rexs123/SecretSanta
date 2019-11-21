@@ -28,7 +28,7 @@ class DashboardController extends Controller
         //return dd();
         return view('home', [
             'groups' => Auth::user()->groups,
-            'profile' => (Auth::user()->groups)? Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first() : ''
+            'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first() : ''
         ]);
     }
 }
