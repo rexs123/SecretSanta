@@ -9,6 +9,11 @@
                     {{ session('status') }}
                 </div>
             @endif
+                @if (session('warning'))
+                    <div class="alert alert-warning" role="alert">
+                        {{ session('warning') }}
+                    </div>
+                @endif
         </div>
     </div>
     <div class="row justify-content-center">
@@ -30,33 +35,45 @@
                     </form>
                 </div>
             </div>
+
         </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Your Groups</div>
                 <div class="card-body">
-                    @if(sizeof($groups) === 0) You do not belong to any groups @endif
-                        <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
-                            @foreach($groups as $group)
-                                <li class="nav-item">
-                                    <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-home-tab" data-toggle="pill" href="#tab-{{ $group->slug }}" role="tab" aria-controls="pills-home" aria-selected="true">{{ $group->name }}</a>
-                                </li>
+                @if(sizeof($groups) === 0) You do not belong to any groups @endif
+                    <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+                        @foreach($groups as $group)
+                            <li class="nav-item">
+                                <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-home-tab" data-toggle="pill" href="#tab-{{ $group->slug }}" role="tab" aria-controls="pills-home" aria-selected="true">{{ $group->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        @if($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            @if($errors->any())
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-danger">{{ $error }}</div>
-                                @endforeach
-                            @endif
-                            @foreach($groups as $group)
-                            <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-{{ $group->slug }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
-                                @include('components._profileForm')
-                                @include('components._profileAddress')
-                                @include('components._profileConfirmation')
+                        @endif
+                        @foreach($groups as $group)
+                        <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-{{ $group->slug }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    @include('components._profileForm')
+                                    @include('components._profileAddress')
+                                    @include('components._profileConfirmation')
+                                </div>
+                                <div class="col-6">
+                                    <form action="" method="POST">
+                                        @csrf
+                                        @method('post')
+
+                                    </form>
+                                </div>
                             </div>
-                            @endforeach
                         </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

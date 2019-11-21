@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\AssignRole;
+use App\Jobs\JoinDiscord;
+use App\Jobs\RemoveDiscord;
+use App\Jobs\RemoveRole;
 use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,13 +78,16 @@ class ProfileController extends Controller
     {
         $profile->confirmed = true;
         $profile->save();
-        return redirect()->back()->with('status', 'Entry successfully confirmed. Thank you.');
+        JoinDiscord::dispatch(Auth::user());
+        AssignRole::dispatch(Auth::user(), $profile->group);
+        return redirect()->back()->with('status', 'Entry successfully confirmed. Thank you. 😄');
     }
 
     public function destroy(Profile $profile)
     {
         $profile->confirmed = false;
         $profile->save();
-        return redirect()->back()->with('status', 'Entry successfully bowed out. We\'re sorry to see you leave.');
+        RemoveRole::dispatch(Auth::user(), $profile->group);
+        return redirect()->back()->with('warning', 'Entry successfully bowed out, we\'re sorry to see you leave. You have been removed from the role. 🙁');
     }
 }
