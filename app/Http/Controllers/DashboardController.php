@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,8 +25,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        //return dd();
         return view('home', [
             'groups' => Auth::user()->groups,
+            'profile' => Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first()
         ]);
     }
 }

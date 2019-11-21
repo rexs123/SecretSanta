@@ -1,4 +1,4 @@
-@if (!$group->profile)
+@if (!$profile)
     <form action="{{ route('profile.store') }}" method="post">
         @csrf
         @method('POST')

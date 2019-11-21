@@ -69,11 +69,11 @@
                                     <h4 class="font-weight-bold text-uppercase">Wishlist</h4>
                                     <hr>
                                     @include('components._profileWishlist')
-                                    @if($group->profile)
-                                        @foreach($group->profile->wishlists as $wishlist)
+                                    @if($profile)
+                                        @foreach($profile->wishlists as $wishlist)
                                             <p class="mb-1"><small>URL: </small><a href="{{ $wishlist->url }}">{{ $wishlist->url }}</a></p>
                                             <p><small>NOTES: </small>{{ $wishlist->notes }}</p>
-                                            
+
                                         @endforeach
                                     @endif
                                 </div>

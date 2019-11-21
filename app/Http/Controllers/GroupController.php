@@ -46,7 +46,7 @@ class GroupController extends Controller
         $code->uses = $code->uses -1;
         $code->save();
 
-        $code->users()->sync($user->id);
+        $code->users()->attach($user->id);
         return redirect()->back()->with('status', 'Successfully joined your group.');
     }
 }
