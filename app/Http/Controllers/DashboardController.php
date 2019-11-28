@@ -26,11 +26,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //return dd();
         return view('home', [
             'groups' => Auth::user()->groups,
             'group' => Auth::user()->groups->first(),
-            'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first() : ''
+            'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first() : '',
+            'receiver' => Auth::user()->reciever
         ]);
     }
 
@@ -40,7 +40,8 @@ class DashboardController extends Controller
         return view('home', [
             'groups' => Auth::user()->groups,
             'group' => $group,
-            'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', $group->id)->first() : ''
+            'profile' => Profile::where('user_id', Auth::id())->where('group_id', $group->id)->first(),
+            'receiver' => (Auth::user()->reciever)? Profile::where('santa_id', Auth::user()->reciever->id)->where('group_id', $group->id)->first() : ''
         ]);
     }
 }

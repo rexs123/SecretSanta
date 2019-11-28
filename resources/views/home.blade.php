@@ -55,8 +55,7 @@
                                 <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
                         @endif
-                        @foreach($groups as $group)
-                        <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-{{ $group->slug }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
+                        <div class="tab-pane fade show {{ ($group->id === $group->id)? 'active' : '' }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
                             <div class="row">
                                 <div class="col-6">
                                     <h4 class="font-weight-bold text-uppercase">Address</h4>
@@ -77,9 +76,26 @@
                                         @endforeach
                                     @endif
                                 </div>
+                                @if($receiver)
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                                <div class="col-12">
+                                    <h2>Your sending to:</h2>
+                                    @include('components._receiverAddress')
+                                    <hr>
+                                    <h3>Their wishlist</h3>
+                                    @if($receiver)
+                                        @foreach($receiver->wishlists as $wishlist)
+                                            <p class="mb-1"><small>URL: </small><a href="{{ $wishlist->url }}">{{ $wishlist->url }}</a></p>
+                                            <p><small>NOTES: </small>{{ $wishlist->notes }}</p>
+
+                                        @endforeach
+                                    @endif
+                                </div>
+                                @endif
                             </div>
                         </div>
-                        @endforeach
                     </div>
                 </div>
             </div>

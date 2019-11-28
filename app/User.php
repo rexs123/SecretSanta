@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function reciever()
     {
-        return $this->belongsTo('App\Profile', 'id', 'santa_id');
+        return $this->hasOne('App\Profile', 'santa_id', 'id');
     }
 
     public function groups()
