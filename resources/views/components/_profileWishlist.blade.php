@@ -1,8 +1,8 @@
-@if($group->profile)
+@if($profile)
     <form action="{{ route('wishlist.store') }}" method="POST">
         @csrf
         @method('post')
-        <input type="hidden" name="profile_id" value="{{ $group->profile->id }}">
+        <input type="hidden" name="profile_id" value="{{ $profile->id }}">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
