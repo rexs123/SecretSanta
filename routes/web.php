@@ -20,6 +20,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('login/callback/discord', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('dashboard/{slug}', 'DashboardController@show')->name('dashboard.groups');
 
 Route::post('group/join', 'GroupController@store')->name('group.store');
 

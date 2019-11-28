@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,18 @@ class DashboardController extends Controller
         //return dd();
         return view('home', [
             'groups' => Auth::user()->groups,
+            'group' => Auth::user()->groups->first(),
             'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first() : ''
+        ]);
+    }
+
+    public function show($slug)
+    {
+        $group = Group::where('slug', $slug)->first();
+        return view('home', [
+            'groups' => Auth::user()->groups,
+            'group' => $group,
+            'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', $group->id)->first() : ''
         ]);
     }
 }

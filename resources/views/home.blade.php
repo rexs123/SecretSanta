@@ -43,9 +43,9 @@
                 <div class="card-body">
                 @if(sizeof($groups) === 0) You do not belong to any groups @endif
                     <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
-                        @foreach($groups as $group)
+                        @foreach($groups as $item)
                             <li class="nav-item">
-                                <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-home-tab" data-toggle="pill" href="#tab-{{ $group->slug }}" role="tab" aria-controls="pills-home" aria-selected="true">{{ $group->name }}</a>
+                                <a class="nav-link {{ request()->is('dashboard/'. $item->slug) ? 'active' : '' }}" href="{{ route('dashboard.groups', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
                             </li>
                         @endforeach
                     </ul>
