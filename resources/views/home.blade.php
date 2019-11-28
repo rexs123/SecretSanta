@@ -80,10 +80,11 @@
                                 <div class="col-12">
                                     <hr>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <h2>Your sending to:</h2>
                                     @include('components._receiverAddress')
-                                    <hr>
+                                </div>
+                                <div class="col-6">
                                     <h3>Their wishlist</h3>
                                     @if($receiver)
                                         @foreach($receiver->wishlists as $wishlist)

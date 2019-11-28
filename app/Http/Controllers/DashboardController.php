@@ -30,7 +30,7 @@ class DashboardController extends Controller
             'groups' => Auth::user()->groups,
             'group' => Auth::user()->groups->first(),
             'profile' => (Auth::user()->groups()->exists())? Profile::where('user_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first() : '',
-            'receiver' => Auth::user()->reciever
+            'receiver' => Profile::where('santa_id', Auth::id())->where('group_id', Auth::user()->groups->first()->id)->first(),
         ]);
     }
 
@@ -41,7 +41,7 @@ class DashboardController extends Controller
             'groups' => Auth::user()->groups,
             'group' => $group,
             'profile' => Profile::where('user_id', Auth::id())->where('group_id', $group->id)->first(),
-            'receiver' => (Auth::user()->reciever)? Profile::where('santa_id', Auth::user()->reciever->id)->where('group_id', $group->id)->first() : ''
+            'receiver' => Profile::where('santa_id', Auth::id())->where('group_id', $group->id)->first()
         ]);
     }
 }

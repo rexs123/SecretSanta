@@ -40,7 +40,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Profile');
     }
 
-    public function reciever()
+    public function receiver()
+    {
+        return $this->hasOne('App\Profile', 'santa_id', 'id');
+    }
+
+    public function santa()
     {
         return $this->hasOne('App\Profile', 'santa_id', 'id');
     }
