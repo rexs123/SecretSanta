@@ -55,7 +55,8 @@
                                 <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
                         @endif
-                        <div class="tab-pane fade show {{ ($group)? ($group->id === $group->id)? 'active' : '' : '' }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
+                        @if($group)
+                        <div class="tab-pane fade show {{ ($group->id === $group->id)? 'active' : '' }}" role="tabpanel" aria-labelledby="tab-{{ $group->slug }}-tab">
                             <div class="row">
                                 <div class="col-6">
                                     <h4 class="font-weight-bold text-uppercase">Address</h4>
@@ -97,6 +98,7 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
